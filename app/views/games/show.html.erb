@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<div class="image-timer">
+  <H1 id='time'></H1>
+  <img id='image'>
+  <button class="btn" id='play'>Play</button>
+</div>
+
+<%= render partial: 'plays/plays_table', locals: {plays: @plays} %>
+
+<script>
+    function loadImages () {
+        var array = <%= game_image_urls.to_json.html_safe %>;
+        display = document.querySelector('#time');
+        image = document.querySelector('#image');
+        startGame(display, image, array);
+    };
+    loadImages()
+</script>
+
+<%= link_to 'Back', games_path %>

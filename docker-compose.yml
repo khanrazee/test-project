@@ -1,0 +1,26 @@
+version: '3.7'
+
+services:
+
+  db:
+    image: 'postgres:11.5-alpine'
+    volumes:
+      - 'db-data:/var/lib/postgresql/data'
+    environment:
+      POSTGRES_USER:
+      POSTGRES_PASSWORD:
+  app:
+    depends_on:
+      - 'db'
+    build:
+      context: .
+      target: dev
+    ports:
+      - 3000:3000
+    volumes:
+      - ./:/app:delegated
+      - /app/tmp
+    command: /bin/sh -c "bin/puma -C config/puma.rb"
+volumes:
+  db-data:
+    external: false

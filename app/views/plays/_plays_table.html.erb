@@ -1,0 +1,7 @@
+<table id="table">
+  <th>Tick</th>
+  <th>Image</th>
+<% plays.each do |play|  %>
+  <%= render partial: 'plays/play_row', locals: {play: play} %>
+<% end %>
+</table>
